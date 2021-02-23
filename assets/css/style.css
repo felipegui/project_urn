@@ -1,8 +1,14 @@
+@keyframes blink {
+    0% { opacity: 0.2; }
+    50% { opacity: 1; }
+    100% { opacity: 0.2; }
+}
 body {
     margin: 0;
     display: flex;
     justify-content: center;
     align-items: center;
+    font-family: Arial, Helvetica, sans-serif;
 }
  .urn {
      background-color: #DBD5C9;
@@ -65,9 +71,60 @@ body {
  }
  .upside-left {
      flex: 1;
+     display: flex;
+     flex-direction: column;
+     padding-left: 20px;
+ }
+ .upside-1 {
+     height: 50px;
+     display: flex;
+     align-items: center;
+ }
+ .upside-2 {
+     height: 50px;
+     display: flex;
+     align-items: center;
+     justify-content: center;
+ }
+ .upside-3 {
+     height: 50px;
+ }
+ .number {
+     display: inline-block;
+     width: 30px;
+     height: 40px;
+     border: 1px solid #000;
+     text-align: center;
+     line-height: 40px;
+     font-size: 25px;
+ }
+ .blink {
+     animation-name: blink;
+     animation-duration: 1s;
+     animation-iteration-count: infinite;
+ }
+ .upside-4 {
+     flex: 1;
+     line-height: 30px;
  }
  .upside-right {
      width: 90px;
+     display: flex;
+     flex-direction: column;
+     align-items: flex-end;
+ }
+ .upside-img {
+    border: 1px solid #000;
+    background-color: #FFF;
+    text-align: center;
+    font-size: 14px;
+ }
+ .upside-img img {
+     width: 100%;
+ }
+ .upside-img.small {
+     width: 80%;
+     font-size: 12px;
  }
 
 
