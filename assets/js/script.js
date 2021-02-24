@@ -45,7 +45,38 @@ function startStep() {
 
 //Função para atualizar a tela
 function updateInterface() {
-    alert("Finalizou de digitar o voto!");
+    let phase = phases[currentStep];
+
+    let candidate = phase.candidates.filter((item)=>{
+        if( item.number == number ) {
+            return true;
+        } else {
+            return false;
+        }
+    });
+    if( candidate.length > 0 ) {
+        candidate = candidate[0];
+
+        yourVoteFor.style.display = 'block';
+
+        notification.style.display = 'block';
+
+        description.innerHTML = `Nome: ${candidate.name}</br>Partido: ${candidate.party}`;        
+
+        let photosHtml = '';
+        for( let i in candidate.photos ) {
+            photosHtml += `<div class="upside-img"><img src="assets/images/${candidate.photos[i].url}" alt=""/>${candidate.photos[i].legend}</div>`; 
+        }
+
+        side.innerHTML = photosHtml;
+
+    } else {
+        yourVoteFor.style.display = 'block';
+
+        notification.style.display = 'block';
+
+        description.innerHTML = `<div class="notification-big blink">O NÚMERO PARA PRESIDENTE NÃO EXISTE!</div>`;
+    }
 }
 
 //Ações nos botões

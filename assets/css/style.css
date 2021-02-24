@@ -103,6 +103,10 @@ body {
      animation-duration: 1s;
      animation-iteration-count: infinite;
  }
+ .notification-big {
+     font-size: 20px;
+     font-weight: bold;
+ }
  .upside-4 {
      flex: 1;
      line-height: 30px;
