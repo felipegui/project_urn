@@ -14,10 +14,15 @@ let numbers = document.querySelector('.upside-3');
 //Variáveis de controle de ambiente
 //Etapa atual
 let currentStep = 0;
+
 //
 let number = '';
+
 //
 let voteWhite = false;
+
+//Armazena os votos
+let wishes = [];
 
 //"Limpa" a tela, depois preenche a tela com as respectivas etapas atuais.
 function startStep() {
@@ -136,10 +141,17 @@ function affirm() {
     if( voteWhite == true ) {
         confirmedVote = true;
 
-        console.log("Confirmando como voto em BRANCO...");
+        wishes.push({
+            phase: phases[currentStep].title,
+            vote: 'BRANCO'
+        });
     } else if( number.length == phase.numbers ) {
         confirmedVote = true;
-        console.log("Confirmando voto como "+number);
+        
+        wishes.push({
+            phase: phases[currentStep].title,
+            vote: number
+        });
     }
 
     //Aqui vai para próxima etapa, exemplo: Votar para Prefeito...assim por diante.
@@ -149,7 +161,9 @@ function affirm() {
         if( phases[currentStep] != undefined ) {
             startStep();
         } else {
-            console.log("FIM!");
+            document.querySelector('.screen').innerHTML = `<div class="giant--warning blink">FIM!</div>`;
+
+            console.log(wishes);
         }
     }
 }
