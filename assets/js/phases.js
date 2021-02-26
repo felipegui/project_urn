@@ -1,14 +1,14 @@
 let phases = [
     {
-        title: 'Presidente',
-        numbers: 2,
+        title: 'Vereador',
+        numbers: 5,
         candidates: [
             {
-                number: '09',
+                number: '12345',
                 name: 'Burronildo Da silva',
                 party: 'Leite Moça',
                 photos: [
-                    { url: 'candidate2.jpg', legend: 'Presidente' }
+                    { url: 'candidate2.jpg', legend: 'Vereador' }
                 ],
             }
         ],

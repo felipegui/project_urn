@@ -14,13 +14,20 @@ let numbers = document.querySelector('.upside-3');
 //Variáveis de controle de ambiente
 //Etapa atual
 let currentStep = 0;
+//
 let number = '';
+//
+let voteWhite = false;
 
 //"Limpa" a tela, depois preenche a tela com as respectivas etapas atuais.
 function startStep() {
     let phase = phases[currentStep];
 
     let numberHtml = '';
+
+    number = '';
+
+    voteWhite = false;
 
     for( let i=0; i<phase.numbers; i++ ) {
         if( i==0 ) {
@@ -64,8 +71,13 @@ function updateInterface() {
         description.innerHTML = `Nome: ${candidate.name}</br>Partido: ${candidate.party}`;        
 
         let photosHtml = '';
+
         for( let i in candidate.photos ) {
-            photosHtml += `<div class="upside-img"><img src="assets/images/${candidate.photos[i].url}" alt=""/>${candidate.photos[i].legend}</div>`; 
+            if( candidate.photos[i].small ) {
+                photosHtml += `<div class="upside-img small"><img src="assets/images/${candidate.photos[i].url}" alt=""/>${candidate.photos[i].legend}</div>`;
+            } else {
+                photosHtml += `<div class="upside-img"><img src="assets/images/${candidate.photos[i].url}" alt=""/>${candidate.photos[i].legend}</div>`;
+            }
         }
 
         side.innerHTML = photosHtml;
@@ -75,7 +87,7 @@ function updateInterface() {
 
         notification.style.display = 'block';
 
-        description.innerHTML = `<div class="notification-big blink">O NÚMERO PARA PRESIDENTE NÃO EXISTE!</div>`;
+        description.innerHTML = `<div class="notification-big blink">O NÚMERO PARA VEREADOR NÃO EXISTE!</div>`;
     }
 }
 
@@ -99,15 +111,47 @@ function clicked(n) {
 }
 
 function white() {
-    alert("Clicou no BRANCO");
+    if( number == '' ) {
+        voteWhite = true;
+
+        yourVoteFor.style.display = 'block';
+
+        notification.style.display = 'block';
+
+        numbers.innerHTML = '';
+
+        description.innerHTML = `<div class="notification-big blink">VOTO EM BRANCO!</div>`;
+    }
 }
 
 function corrects() {
-    alert("Clicou em CORRIGE");
+    startStep();
 }
 
 function affirm() {
-    alert("Clicou em CONFIRMAR");
+    let phase = phases[currentStep];
+
+    let confirmedVote = false;
+
+    if( voteWhite == true ) {
+        confirmedVote = true;
+
+        console.log("Confirmando como voto em BRANCO...");
+    } else if( number.length == phase.numbers ) {
+        confirmedVote = true;
+        console.log("Confirmando voto como "+number);
+    }
+
+    //Aqui vai para próxima etapa, exemplo: Votar para Prefeito...assim por diante.
+    if( confirmedVote ) {
+        currentStep++;
+
+        if( phases[currentStep] != undefined ) {
+            startStep();
+        } else {
+            console.log("FIM!");
+        }
+    }
 }
 
 startStep();
